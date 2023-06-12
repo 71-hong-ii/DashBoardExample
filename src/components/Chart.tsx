@@ -19,7 +19,7 @@ const series = [
 // 차트 컴포넌트를 정의합니다.
 const MyChart: React.FC = () => (
   <Chart>
-    <ChartTitle text="Team Performance" /> // 차트의 제목을 설정합니다.
+    <ChartTitle text="Team Efficency" /> // 차트의 제목을 설정합니다.
     <ChartLegend position="top" orientation="horizontal" /> // 범례의 위치와 방향을 설정합니다.
     <ChartCategoryAxis>
       <ChartCategoryAxisItem categories={categories} startAngle={45} /> // 카테고리 축을 설정합니다.
