@@ -8,9 +8,11 @@ import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 
-const Grid = () =>{
-    return (<div>
+//props.data[i].phone
 
+const Grid = (props: any) =>{
+    return (<div>
+        
     </div>)
 }
 
