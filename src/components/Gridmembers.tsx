@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Gridmember = () => {
   return (
@@ -6,6 +6,8 @@ const Gridmember = () => {
       <div className="card-container grid">
         <h3 className="card-title">team members</h3>
       </div>
+      <span></span>
+      
     </div>
   );
 };
