@@ -1,4 +1,6 @@
 import React from "react";
+import { employees } from "./../resources/employees";
+import Grid from "./Grid";
 
 const Gridmember = () => {
   return (
@@ -7,7 +9,7 @@ const Gridmember = () => {
         <h3 className="card-title">team members</h3>
       </div>
       <span></span>
-      
+      <Grid data={employees}></Grid>
     </div>
   );
 };
