@@ -8,7 +8,7 @@ import {
   LocalizationProvider,
   loadMessages,
 } from "@progress/kendo-react-intl";
-import TeamEfficiencyChart from "./components/Chart";
+import Chart from "./components/Chart";
 import Gridmember from "./components/Gridmembers";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <TeamEfficiencyChart></TeamEfficiencyChart>
+      <Chart></Chart>
       <Gridmember></Gridmember>
     </div>
   );
