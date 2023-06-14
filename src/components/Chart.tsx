@@ -12,11 +12,13 @@ const categories = ["January 2020", "February 2020", "March 2020", "April 2020"]
 // 팀 오더를 정의합니다.
 const teamOrders: { [key: number]: number } = {};
 orders.forEach((order) => {
-  const teamID = (order.teamID);
-  if (teamOrders[teamID]) {
-    teamOrders[teamID] += 1; // 이미 해당 팀의 주문이 있을 경우 1 증가
-  } else {
-    teamOrders[teamID] = 1; // 해당 팀의 첫 번째 주문인 경우 1로 초기화
+  const teamID = order.teamID;
+  if (teamID && !isNaN(teamID)) {
+    if (teamOrders[teamID]) {
+      teamOrders[teamID] += 1; // 이미 해당 팀의 주문이 있을 경우 1 증가
+    } else {
+      teamOrders[teamID] = 1; // 해당 팀의 첫 번째 주문인 경우 1로 초기화
+    }
   }
 });
 
@@ -26,9 +28,12 @@ const data = Object.entries(teamOrders).map(([teamID, count]) => ({
   value: count,
 }));
 
-
 // 툴팁을 렌더링하는 컴포넌트를 정의합니다.
 const OrderTooltip: React.FC<any> = ({ point }) => {
+  if (!point) {
+    return null; // point가 undefined인 경우 null을 반환하여 아무것도 렌더링하지 않음
+  }
+
   const totalOrders = Object.values(teamOrders).reduce((a, b) => a + b, 0);
   const orderPercentage = ((point.value / totalOrders) * 100).toFixed(2);
 
@@ -40,6 +45,7 @@ const OrderTooltip: React.FC<any> = ({ point }) => {
     </div>
   );
 };
+
 
 // 차트 컴포넌트를 정의합니다.
 const MyChart: React.FC = () => (
