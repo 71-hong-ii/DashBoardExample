@@ -6,6 +6,8 @@ import {
   GridColumnMenuFilter,
   GridToolbar,
   GridFilterChangeEvent,
+  GridExpandChangeEvent,
+  GridGroupChangeEvent,
 } from "@progress/kendo-react-grid";
 //import Grid from "./Grid";
 import {
@@ -47,7 +49,13 @@ const Gridmember = () => {
   const [resultState, setResultState] = useState<GroupResult[]>(
     processWithGroups(employees, initialGroup)    
   );
+  const onGroupChange = React.useCallback((event: GridGroupChangeEvent) => {
+    const newDataState = processWithGroups(employees, event.group);
 
+    setGroup(event.group);
+    setResultState(newDataState);
+  }, []);
+  
   return (
     <div>
       <div className="card-container grid">
