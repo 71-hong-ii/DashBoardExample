@@ -11,7 +11,6 @@ import {
   GridDataStateChangeEvent,
   GridCellProps,
 } from "@progress/kendo-react-grid";
-
 import {
   IntlProvider,
   load,
@@ -38,7 +37,6 @@ import  employees  from "./../resources/employees_json.json";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
 import { employee } from "./../interfaces/employee";
-
 
 const initialDataState: State = {
   take: 10,
