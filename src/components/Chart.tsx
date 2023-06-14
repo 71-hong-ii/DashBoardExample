@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend } from '@progress/kendo-react-charts';
 
-import {orders} from './../resources/orders.js';
-
+import { orders } from './../resources/orders.js';
 
 // 데이터를 정의합니다. 이는 실제 데이터에 따라 변경되어야 합니다.
 const categories = ["January 2020", "February 2020", "March 2020", "April 2020"];
