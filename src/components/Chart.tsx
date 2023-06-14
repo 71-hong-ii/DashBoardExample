@@ -1,6 +1,6 @@
 // 필요한 모듈을 import 합니다.
 import * as React from 'react';
-import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend } from '@progress/kendo-react-charts';
+import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend, ChartTooltip } from '@progress/kendo-react-charts';
 // ChartSeriesItemTooltip 컴포넌트를 import 합니다.
 import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
 
@@ -13,7 +13,7 @@ const categories = ["January 2020", "February 2020", "March 2020", "April 2020"]
 const teamOrders: { [key: number]: number } = {};
 orders.forEach((order) => {
   const teamID = order.teamID;
-  if (teamID && !isNaN(teamID)) {
+  if (teamID) {
     if (teamOrders[teamID]) {
       teamOrders[teamID] += 1; // 이미 해당 팀의 주문이 있을 경우 1 증가
     } else {
@@ -21,6 +21,7 @@ orders.forEach((order) => {
     }
   }
 });
+
 
 // 주문량 데이터를 저장합니다.
 const data = Object.entries(teamOrders).map(([teamID, count]) => ({
@@ -52,6 +53,7 @@ const MyChart: React.FC = () => (
   <Chart>
     <ChartTitle text="Team Order Distribution" />
     <ChartLegend position="top" orientation="horizontal" />
+    <ChartTooltip render={OrderTooltip} />
     <ChartCategoryAxis>
       <ChartCategoryAxisItem categories={categories} startAngle={45} />
     </ChartCategoryAxis>
@@ -62,5 +64,6 @@ const MyChart: React.FC = () => (
     </ChartSeries>
   </Chart>
 );
+
 
 export default MyChart;
