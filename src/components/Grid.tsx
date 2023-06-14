@@ -11,9 +11,9 @@ import { useLocalization } from '@progress/kendo-react-intl';
 //props.data[i].phone
 
 const Grid = (props: any) =>{
-    return (<div>
-        
-    </div>)
+    return (<>
+      
+    </>)
 }
 
 export default Grid;
