@@ -16,12 +16,10 @@ const MyChart: React.FC = () => (
       <ChartCategoryAxisItem categories={categories} startAngle={45} /> // 카테고리 축을 설정합니다.
     </ChartCategoryAxis>
     <ChartSeries>
-      {teams.map((item, idx) => (
         <ChartSeriesItem
-          key={idx}
           type="line" // 차트의 형태를 설정합니다. 이 경우 선형 차트를 사용합니다.
+          data = {teams}
         />
-      ))}
     </ChartSeries>
   </Chart>
 );

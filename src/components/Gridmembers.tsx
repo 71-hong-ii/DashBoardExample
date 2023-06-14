@@ -19,22 +19,34 @@ import {
   filterBy,
   CompositeFilterDescriptor,
   GroupDescriptor,
+  groupBy,
 } from "@progress/kendo-data-query";
+import {
+  setGroupIds,
+} from "@progress/kendo-react-data-tools";
 import { employees } from "./../resources/employees";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
-
+import {employee} from "./../interfaces/employee"
 
 const initialFilter: CompositeFilterDescriptor = {
   logic: "and",
   filters: [{ field: "fullName", operator: "contains", value: "" }],
 };
 const initialGroup: GroupDescriptor[]= [];
+const processWithGroups = (data: employee[], group: GroupDescriptor[]) => {
+  const newDataState = groupBy(data, group);
+
+  setGroupIds({ data: newDataState, group: group });
+
+  return newDataState;
+};
+
 
 const Gridmember = () => {
   const [filter, setFilter] = useState(initialFilter);
   const [group, setGroup] = useState(initialGroup);
-  
+
   return (
     <div>
       <div className="card-container grid">
