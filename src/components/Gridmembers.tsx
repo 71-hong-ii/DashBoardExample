@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   GridColumn,
   GridColumnMenuSort,
   GridColumnMenuFilter,
   GridToolbar,
+  GridFilterChangeEvent,  
 } from "@progress/kendo-react-grid";
 //import Grid from "./Grid";
 import {
@@ -14,11 +15,21 @@ import {
   loadMessages,
   IntlService,
 } from "@progress/kendo-react-intl";
+import {
+  filterBy,
+  CompositeFilterDescriptor,
+} from "@progress/kendo-data-query";
 import { employees } from "./../resources/employees";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
 
+const initialFilter: CompositeFilterDescriptor = {
+  logic: "and",
+  filters: [{ field: "fullName", operator: "contains", value: "" }],
+};
+
 const Gridmember = () => {
+  const [filter, setFilter] = useState(initialFilter);
   return (
     <div>
       <div className="card-container grid">
@@ -29,9 +40,12 @@ const Gridmember = () => {
         style={{
           height: "400px",
         }}
-        data={employees}
+        data={filterBy(employees, filter)}
+        filterable = {true}
+        filter = {filter}
+        onFilterChange={(e: GridFilterChangeEvent) => setFilter(e.filter)}
       >
-        <GridColumn field = "employees" title="Employee">
+        <GridColumn field="employees" title="Employee">
           <GridColumn field="fullName" title="fullName"></GridColumn>
           <GridColumn field="jobTitle" title="jobTitle"></GridColumn>
           <GridColumn field="country" title="country"></GridColumn>
@@ -39,7 +53,7 @@ const Gridmember = () => {
         <GridColumn title="Performance">
           <GridColumn field="rating"></GridColumn>
           <GridColumn field="target"></GridColumn>
-          <GridColumn field="budget"></GridColumn>
+          <GridColumn field="budget" filter = "numeric"></GridColumn>
         </GridColumn>
         <GridColumn title="Contacts">
           <GridColumn field="phone"></GridColumn>
