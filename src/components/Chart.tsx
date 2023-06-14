@@ -34,14 +34,7 @@ const MyChart: React.FC = () => (
       <ChartCategoryAxisItem categories={categories} startAngle={45} /> // 카테고리 축을 설정합니다.
     </ChartCategoryAxis>
     <ChartSeries>
-<<<<<<< HEAD
       <ChartSeriesItem type="pie" data={data} field="value" categoryField="category" />
-=======
-        <ChartSeriesItem
-          type="line" // 차트의 형태를 설정합니다. 이 경우 선형 차트를 사용합니다.
-          data = {teams}
-        />
->>>>>>> ffdd8c64dc25b08c09517513f9a8d35c1e8a4928
     </ChartSeries>
   </Chart>
 );
