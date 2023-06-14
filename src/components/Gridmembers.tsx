@@ -34,7 +34,7 @@ import {
   setExpandedState,
   setGroupIds,
 } from "@progress/kendo-react-data-tools";
-import { employees } from "./../resources/employees";
+import  employees  from "./../resources/employees_json.json";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
 import { employee } from "./../interfaces/employee";
