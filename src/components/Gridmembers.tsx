@@ -1,48 +1,33 @@
-import React, { useState, SetStateAction, JSXElementConstructor } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   GridColumn,
-  GridColumnMenuSort,
-  GridColumnMenuFilter,
   GridToolbar,
   GridFilterChangeEvent,
   GridExpandChangeEvent,
-  GridGroupChangeEvent,
-  GridDataStateChangeEvent,
   GridCellProps,
 } from "@progress/kendo-react-grid";
-
 import {
-  IntlProvider,
-  load,
-  LocalizationProvider,
-  loadMessages,
-  IntlService,
-} from "@progress/kendo-react-intl";
-import {
-  filterBy,
   CompositeFilterDescriptor,
   GroupDescriptor,
-  groupBy,
-  GroupResult,
-  State,
-  DataResult,
   process,
   AggregateDescriptor,
 } from "@progress/kendo-data-query";
-import {
-  setExpandedState,
-  setGroupIds,
-} from "@progress/kendo-react-data-tools";
-import  employees  from "./../resources/employees_json.json";
-import { teams } from "./../resources/teams";
-import { orders } from "./../resources/orders";
-import { employee } from "./../interfaces/employee";
 
+interface Employee {
+  fullName: string;
+  jobTitle: string;
+  country: string;
+  rating: number;
+  target: number;
+  budget: number;
+  phone: string;
+  address: string;
+}
 
-const initialDataState: State = {
-  take: 10,
+const initialDataState = {
   skip: 0,
+  take: 10,
   group: [{ field: "rating" }],
 };
 
@@ -51,36 +36,30 @@ const aggregates: AggregateDescriptor[] = [
   { field: "budget", aggregate: "average" },
 ];
 
-const processWithGroups = (data: employee[], dataState: State) => {
-  const groups = dataState.group;
-  if (groups) {
-    groups.map((group) => (group.aggregates = aggregates));
-  }
-  dataState.group = groups;
-  const newDataState = process(data, dataState);
-
-  setGroupIds({ data: newDataState.data, group: dataState.group });
-
-  return newDataState;
-};
-
-
-
 const Gridmember = () => {
-  const [dataState, setDataState] = React.useState<State>(initialDataState);
-  const [result, setResult] = React.useState<DataResult>(
-    processWithGroups(employees, initialDataState)
-  );
-  const [collapsedState, setCollapsedState] = React.useState<string[]>([]);
+  const [dataState, setDataState] = useState(initialDataState);
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [collapsedState, setCollapsedState] = useState<string[]>([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/dataframe");
+        const data = await response.json();
+        setEmployees(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
-  const dataStateChange = (event: GridDataStateChangeEvent) => {
-    const newDataState = processWithGroups(employees, event.dataState);
-    setResult(newDataState);
-    setDataState(event.dataState);
+    fetchData();
+  }, []);
+
+  const dataStateChange = (event: any) => {
+    setDataState(event.data);
   };
 
-  const expandChange = (event: GridExpandChangeEvent) => {
+  const expandChange = (event: any) => {
     const item = event.dataItem;
 
     if (item.groupId) {
@@ -92,69 +71,56 @@ const Gridmember = () => {
   };
 
   const cellRender = (
-    tdElement: React.ReactElement<HTMLTableCellElement, string | JSXElementConstructor<any>> | null,
+    tdElement: React.ReactElement<HTMLTableCellElement> | null,
     cellProps: GridCellProps
-  ): JSX.Element => {
+  ) => {
     if (cellProps.rowType === "groupFooter") {
-      if (cellProps.field === "UnitPrice") {
+      if (cellProps.field === "rating") {
         return (
           <td aria-colindex={cellProps.columnIndex} role="gridcell">
-            Average: {cellProps.dataItem.aggregates.UnitPrice.average}
+            Average: {cellProps.dataItem.aggregates?.rating?.average}
           </td>
         );
-      } else if (cellProps.field === "UnitsInStock") {
+      } else if (cellProps.field === "budget") {
         return (
           <td aria-colindex={cellProps.columnIndex} role="gridcell">
-            Sum: {cellProps.dataItem.aggregates.UnitsInStock.sum}
+            Average: {cellProps.dataItem.aggregates?.budget?.average}
           </td>
         );
       }
     }
-    return tdElement as JSX.Element;
+    return tdElement as React.ReactElement<HTMLTableCellElement>;
   };
-  const newData = setExpandedState({
-    data: result.data,
-    collapsedIds: collapsedState,
-  });
 
-
+  const newData = process(employees, dataState);
 
   return (
     <div>
       <div className="card-container grid">
         <h3 className="card-title">Team members</h3>
       </div>
-      <span></span>
       <Grid
         style={{ height: "520px" }}
-        resizable={true}
-        reorderable={true}
+        data={newData}
         filterable={true}
         sortable={true}
         pageable={{ pageSizes: true }}
-        total={result.total}
         groupable={{ footer: "visible" }}
-        data={newData}
         onDataStateChange={dataStateChange}
-        {...dataState}
         onExpandChange={expandChange}
         expandField="expanded"
         cellRender={cellRender}
+        {...dataState}
       >
-        <GridColumn field="employees" title="Employee" groupable={false}>
-          <GridColumn field="fullName" title="fullName"></GridColumn>
-          <GridColumn field="jobTitle" title="jobTitle"></GridColumn>
-          <GridColumn field="country" title="country"></GridColumn>
-        </GridColumn>
-        <GridColumn title="Performance" groupable={false}>
-          <GridColumn field="rating" filter="numeric"></GridColumn>
-          <GridColumn field="target"></GridColumn>
-          <GridColumn field="budget" filter="numeric"></GridColumn>
-        </GridColumn>
-        <GridColumn title="Contacts" groupable={false}>
-          <GridColumn field="phone"></GridColumn>
-          <GridColumn field="address"></GridColumn>
-        </GridColumn>
+        <GridToolbar />
+        <GridColumn field="fullName" title="Full Name" />
+        <GridColumn field="jobTitle" title="Job Title" />
+        <GridColumn field="country" title="Country" />
+        <GridColumn field="rating" title="Rating" filter="numeric" />
+        <GridColumn field="target" title="Target" />
+        <GridColumn field="budget" title="Budget" filter="numeric" />
+        <GridColumn field="phone" title="Phone" />
+        <GridColumn field="address" title="Address" />
       </Grid>
     </div>
   );
