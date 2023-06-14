@@ -5,7 +5,7 @@ import {
   GridColumnMenuSort,
   GridColumnMenuFilter,
   GridToolbar,
-  GridFilterChangeEvent,  
+  GridFilterChangeEvent,
 } from "@progress/kendo-react-grid";
 //import Grid from "./Grid";
 import {
@@ -20,20 +20,19 @@ import {
   CompositeFilterDescriptor,
   GroupDescriptor,
   groupBy,
+  GroupResult,
 } from "@progress/kendo-data-query";
-import {
-  setGroupIds,
-} from "@progress/kendo-react-data-tools";
+import { setGroupIds } from "@progress/kendo-react-data-tools";
 import { employees } from "./../resources/employees";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
-import {employee} from "./../interfaces/employee"
+import { employee } from "./../interfaces/employee";
 
 const initialFilter: CompositeFilterDescriptor = {
   logic: "and",
   filters: [{ field: "fullName", operator: "contains", value: "" }],
 };
-const initialGroup: GroupDescriptor[]= [];
+const initialGroup: GroupDescriptor[] = [{ field: "rating" }];
 const processWithGroups = (data: employee[], group: GroupDescriptor[]) => {
   const newDataState = groupBy(data, group);
 
@@ -42,10 +41,12 @@ const processWithGroups = (data: employee[], group: GroupDescriptor[]) => {
   return newDataState;
 };
 
-
 const Gridmember = () => {
   const [filter, setFilter] = useState(initialFilter);
   const [group, setGroup] = useState(initialGroup);
+  const [resultState, setResultState] = useState<GroupResult[]>(
+    processWithGroups(employees, initialGroup)    
+  );
 
   return (
     <div>
@@ -58,8 +59,8 @@ const Gridmember = () => {
           height: "400px",
         }}
         data={filterBy(employees, filter)}
-        filterable = {true}
-        filter = {filter}
+        filterable={true}
+        filter={filter}
         onFilterChange={(e: GridFilterChangeEvent) => setFilter(e.filter)}
       >
         <GridColumn field="employees" title="Employee">
@@ -68,9 +69,9 @@ const Gridmember = () => {
           <GridColumn field="country" title="country"></GridColumn>
         </GridColumn>
         <GridColumn title="Performance">
-          <GridColumn field="rating" filter = "numeric"></GridColumn>
+          <GridColumn field="rating" filter="numeric"></GridColumn>
           <GridColumn field="target"></GridColumn>
-          <GridColumn field="budget" filter = "numeric"></GridColumn>
+          <GridColumn field="budget" filter="numeric"></GridColumn>
         </GridColumn>
         <GridColumn title="Contacts">
           <GridColumn field="phone"></GridColumn>
