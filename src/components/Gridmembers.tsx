@@ -18,18 +18,23 @@ import {
 import {
   filterBy,
   CompositeFilterDescriptor,
+  GroupDescriptor,
 } from "@progress/kendo-data-query";
 import { employees } from "./../resources/employees";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
 
+
 const initialFilter: CompositeFilterDescriptor = {
   logic: "and",
   filters: [{ field: "fullName", operator: "contains", value: "" }],
 };
+const initialGroup: GroupDescriptor[]= [];
 
 const Gridmember = () => {
   const [filter, setFilter] = useState(initialFilter);
+  const [group, setGroup] = useState(initialGroup);
+  
   return (
     <div>
       <div className="card-container grid">
@@ -51,7 +56,7 @@ const Gridmember = () => {
           <GridColumn field="country" title="country"></GridColumn>
         </GridColumn>
         <GridColumn title="Performance">
-          <GridColumn field="rating"></GridColumn>
+          <GridColumn field="rating" filter = "numeric"></GridColumn>
           <GridColumn field="target"></GridColumn>
           <GridColumn field="budget" filter = "numeric"></GridColumn>
         </GridColumn>

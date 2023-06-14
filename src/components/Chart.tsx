@@ -20,8 +20,6 @@ const MyChart: React.FC = () => (
         <ChartSeriesItem
           key={idx}
           type="line" // 차트의 형태를 설정합니다. 이 경우 선형 차트를 사용합니다.
-          data={item.data}
-          name={item.name}
         />
       ))}
     </ChartSeries>
