@@ -1,6 +1,8 @@
 // 필요한 모듈을 import 합니다.
 import * as React from 'react';
 import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend } from '@progress/kendo-react-charts';
+// ChartSeriesItemTooltip 컴포넌트를 import 합니다.
+import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
 
 import { orders } from './../resources/orders.js';
 
@@ -24,16 +26,33 @@ const data = Object.entries(teamOrders).map(([teamID, count]) => ({
   value: count,
 }));
 
+
+// 툴팁을 렌더링하는 컴포넌트를 정의합니다.
+const OrderTooltip: React.FC<any> = ({ point }) => {
+  const totalOrders = Object.values(teamOrders).reduce((a, b) => a + b, 0);
+  const orderPercentage = ((point.value / totalOrders) * 100).toFixed(2);
+
+  return (
+    <div>
+      <h3>{point.category}</h3>
+      <p>Order Percentage: {orderPercentage}%</p>
+      <p>Total Orders: {point.value}</p>
+    </div>
+  );
+};
+
 // 차트 컴포넌트를 정의합니다.
 const MyChart: React.FC = () => (
   <Chart>
-    <ChartTitle text="Team Order Distribution" /> // 차트의 제목을 설정합니다.
-    <ChartLegend position="top" orientation="horizontal" /> // 범례의 위치와 방향을 설정합니다.
+    <ChartTitle text="Team Order Distribution" />
+    <ChartLegend position="top" orientation="horizontal" />
     <ChartCategoryAxis>
-      <ChartCategoryAxisItem categories={categories} startAngle={45} /> // 카테고리 축을 설정합니다.
+      <ChartCategoryAxisItem categories={categories} startAngle={45} />
     </ChartCategoryAxis>
     <ChartSeries>
-      <ChartSeriesItem type="pie" data={data} field="value" categoryField="category" />
+      <ChartSeriesItem type="pie" data={data} field="value" categoryField="category">
+        <ChartSeriesItemTooltip render={OrderTooltip} />
+      </ChartSeriesItem>
     </ChartSeries>
   </Chart>
 );
