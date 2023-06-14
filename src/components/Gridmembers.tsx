@@ -39,6 +39,10 @@ import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
 import { employee } from "./../interfaces/employee";
 
+interface PageState {
+  skip: number;
+  take: number;
+}
 
 const initialDataState: State = {
   take: 10,
@@ -72,7 +76,6 @@ const Gridmember = () => {
     processWithGroups(employees, initialDataState)
   );
   const [collapsedState, setCollapsedState] = React.useState<string[]>([]);
-
 
 
   const dataStateChange = (event: GridDataStateChangeEvent) => {
