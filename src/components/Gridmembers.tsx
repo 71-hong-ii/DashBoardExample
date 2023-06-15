@@ -37,6 +37,7 @@ import  employees  from "./../resources/employees_json.json";
 import { teams } from "./../resources/teams";
 import { orders } from "./../resources/orders";
 import { employee } from "./../interfaces/employee";
+import { HomeLayout } from "./homeLayout";
 
 const initialDataState: State = {
   take: 10,
@@ -131,41 +132,43 @@ const Gridmember = () => {
 
   return (
     <div>
-      <div className="card-container grid">
-        <h3 className="card-title">Team members</h3>
-      </div>
-      <span></span>
-      <Grid
-        style={{ height: "520px" }}
-        resizable={true}
-        reorderable={true}
-        filterable={true}
-        sortable={true}
-        pageable={{ pageSizes: true }}
-        total={result.total}
-        groupable={{ footer: "visible" }}
-        data={newData}
-        onDataStateChange={dataStateChange}
-        {...dataState}
-        onExpandChange={expandChange}
-        expandField="expanded"
-        cellRender={cellRender}
-      >
-        <GridColumn field="employees" title="Employee" groupable={false}>
-          <GridColumn field="fullName" title="fullName"></GridColumn>
-          <GridColumn field="jobTitle" title="jobTitle"></GridColumn>
-          <GridColumn field="country" title="country"></GridColumn>
-        </GridColumn>
-        <GridColumn title="Performance" groupable={false}>
-          <GridColumn field="rating" filter="numeric"></GridColumn>
-          <GridColumn field="target"></GridColumn>
-          <GridColumn field="budget" filter="numeric"></GridColumn>
-        </GridColumn>
-        <GridColumn title="Contacts" groupable={false}>
-          <GridColumn field="phone"></GridColumn>
-          <GridColumn field="address"></GridColumn>
-        </GridColumn>
-      </Grid>
+      <HomeLayout>
+        <div className="card-container grid">
+          <h3 className="card-title">Team members</h3>
+        </div>
+        <span></span>
+        <Grid
+          style={{ height: "520px" }}
+          resizable={true}
+          reorderable={true}
+          filterable={true}
+          sortable={true}
+          pageable={{ pageSizes: true }}
+          total={result.total}
+          groupable={{ footer: "visible" }}
+          data={newData}
+          onDataStateChange={dataStateChange}
+          {...dataState}
+          onExpandChange={expandChange}
+          expandField="expanded"
+          cellRender={cellRender}
+        >
+          <GridColumn field="employees" title="Employee" groupable={false}>
+            <GridColumn field="fullName" title="fullName"></GridColumn>
+            <GridColumn field="jobTitle" title="jobTitle"></GridColumn>
+            <GridColumn field="country" title="country"></GridColumn>
+          </GridColumn>
+          <GridColumn title="Performance" groupable={false}>
+            <GridColumn field="rating" filter="numeric"></GridColumn>
+            <GridColumn field="target"></GridColumn>
+            <GridColumn field="budget" filter="numeric"></GridColumn>
+          </GridColumn>
+          <GridColumn title="Contacts" groupable={false}>
+            <GridColumn field="phone"></GridColumn>
+            <GridColumn field="address"></GridColumn>
+          </GridColumn>
+        </Grid>
+      </HomeLayout>
     </div>
   );
 };

@@ -22,7 +22,7 @@ export const HomeLayout = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [expanded, setExpanded] = useState(true);
-  const [selected, setSelected] = useState("Employees");
+  const [selected, setSelected] = useState("");
 
   const handleClick = () => {
     setExpanded(!expanded);
