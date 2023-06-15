@@ -18,11 +18,11 @@ function App() {
   return (
     <div className="App">
       <HomeLayout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/employees" element={<Gridmember />} />
-        <Route path="/orders" element={<Orders />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Gridmember />} />
+          <Route path="/employees" element={<Gridmember />} />
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
       </HomeLayout>
     </div>
   );
