@@ -22,7 +22,7 @@ import {
   filterBy,
   CompositeFilterDescriptor,
   GroupDescriptor,
-  groupBy,
+  groupBy,  
   GroupResult,
   State,
   DataResult,
