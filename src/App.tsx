@@ -12,6 +12,7 @@ import {
 import PieChart from "./components/PieChart";
 import Gridmember from "./components/Gridmembers";
 import { Home } from "./pages/home";
+import {Orders} from "./pages/orders"
 
 function App() {
   const [contextState, setContextState] = React.useState({
@@ -32,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/employees" element={<Gridmember />} />
-        <Route path="/orders" element={<PieChart />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
     </div>
   );

@@ -6,7 +6,7 @@ import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
 export const items = [
   {
     text: "Employees",
-    selected: true,
+    selected: false,
     route: "/employees",
     icon: "k-i-grid",
   },
@@ -14,19 +14,19 @@ export const items = [
     text: "Orders",
     selected: false,
     route: "/orders",
-    icon: "k-icon k-i-notification k-i-globe",
+    icon: "k-i-grid",
   },
 ];
 
-export const HomeLayout = (props : any) => {
+export const HomeLayout = (props: any) => { 
   const navigate = useNavigate();
   const location = useLocation();
   const [expanded, setExpanded] = React.useState(true);
 
   /*
-  const setSelectedItem = (pathName) => {
+  const setSelectedItem = (pathName:any) => {
     let currentPath:any = items.find((item) => item.route === pathName);
-    if (currentPath.text) {
+    if (currentPath) {
       return currentPath.text;
     }
   };
@@ -47,23 +47,8 @@ export const HomeLayout = (props : any) => {
         <Button icon="menu" onClick={handleClick} />
 
         <span className="overview">
-          {selected === "Dashboard" ? "Overview" : selected}
+          {selected === "Employees" ? "Overview" : selected}
         </span>
-        <div className="right-widget">
-          <div className="alert-container"></div>
-          <Link
-            to="/home/about"
-            style={{
-              color: "#424242",
-              fontWeight: "400",
-              fontSize: "14px",
-              fontFamily: "Roboto",
-              marginTop: "3px",
-            }}
-          >
-            About
-          </Link>
-        </div>
       </div>
 
       <div>
