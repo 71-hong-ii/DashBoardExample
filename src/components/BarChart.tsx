@@ -4,22 +4,8 @@ import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAx
 // ChartSeriesItemTooltip 컴포넌트를 import 합니다.
 import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
 
-import { orders } from '../resources/orders.js';
+import { teamOrders } from '../resources/teamOrders.js';
 import { categories } from '../resources/categories.js';
-
-// 팀 오더를 정의합니다.
-const teamOrders: { [key: number]: number } = {};
-orders.forEach((order) => {
-  const teamID = order.teamID;
-  if (teamID) {
-    if (teamOrders[teamID]) {
-      teamOrders[teamID] += 1; // 이미 해당 팀의 주문이 있을 경우 1 증가
-    } else {
-      teamOrders[teamID] = 1; // 해당 팀의 첫 번째 주문인 경우 1로 초기화
-    }
-  }
-});
-
 
 // 주문량 데이터를 저장합니다.
 const data = Object.entries(teamOrders).map(([teamID, count]) => ({
