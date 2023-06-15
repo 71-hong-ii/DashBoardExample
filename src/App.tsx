@@ -9,7 +9,7 @@ import {
   LocalizationProvider,
   loadMessages,
 } from "@progress/kendo-react-intl";
-import MyChart from "./components/Chart";
+import PieChart from "./components/PieChart";
 import Gridmember from "./components/Gridmembers";
 import { Home } from "./pages/home";
 
@@ -32,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/employees" element={<Gridmember />} />
-        <Route path="/orders" element={<MyChart />} />
+        <Route path="/orders" element={<PieChart />} />
       </Routes>
     </div>
   );

@@ -4,7 +4,7 @@ import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAx
 // ChartSeriesItemTooltip 컴포넌트를 import 합니다.
 import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
 
-import { orders } from './../resources/orders.js';
+import { orders } from '../resources/orders.js';
 
 // 데이터를 정의합니다. 이는 실제 데이터에 따라 변경되어야 합니다.
 const categories = ["January 2020", "February 2020", "March 2020", "April 2020"];
@@ -49,7 +49,7 @@ const OrderTooltip: React.FC<any> = ({ point }) => {
 
 
 // 차트 컴포넌트를 정의합니다.
-const MyChart: React.FC = () => (
+const PieChart: React.FC = () => (
   <Chart>
     <ChartTitle text="Team Order Distribution" />
     <ChartLegend position="top" orientation="horizontal" />
@@ -66,4 +66,4 @@ const MyChart: React.FC = () => (
 );
 
 
-export default MyChart;
+export default PieChart;
