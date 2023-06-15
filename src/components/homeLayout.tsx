@@ -6,7 +6,7 @@ import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
 export const items = [
   {
     text: "Employees",
-    selected: false,
+    selected: true,
     route: "/employees",
     icon: "k-i-grid",
   },
