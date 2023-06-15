@@ -5,9 +5,7 @@ import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAx
 import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
 
 import { orders } from '../resources/orders.js';
-
-// 데이터를 정의합니다. 이는 실제 데이터에 따라 변경되어야 합니다.
-const categories = ["January 2020", "February 2020", "March 2020", "April 2020"];
+import { categories } from '../resources/categories.js';
 
 // 팀 오더를 정의합니다.
 const teamOrders: { [key: number]: number } = {};
