@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@progress/kendo-react-buttons";
 import { useLocation, useNavigate, Outlet, Link } from "react-router-dom";
 import { Drawer, DrawerContent } from "@progress/kendo-react-layout";
@@ -14,33 +14,31 @@ export const items = [
     text: "Orders",
     selected: false,
     route: "/orders",
-    icon: "k-i-grid",
+    icon: "chart-line-markers",
   },
 ];
 
-export const HomeLayout = (props: any) => { 
+export const HomeLayout = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [expanded, setExpanded] = React.useState(true);
-
-  /*
-  const setSelectedItem = (pathName:any) => {
-    let currentPath:any = items.find((item) => item.route === pathName);
-    if (currentPath) {
-      return currentPath.text;
-    }
-  };
-*/
+  const [expanded, setExpanded] = useState(true);
+  const [selected, setSelected] = useState("Employees");
 
   const handleClick = () => {
     setExpanded(!expanded);
   };
+
   const onSelect = (e: any) => {
     navigate(e.itemTarget.props.route);
   };
 
-  //const selected = setSelectedItem(location.pathname);
-  let selected = "Employees";
+  useEffect(() => {
+    const selectedItem = items.find((item) => item.route === location.pathname);
+    if (selectedItem) {
+      setSelected(selectedItem.text);
+    }
+  }, [location.pathname]);
+
   return (
     <div>
       <div className="custom-toolbar">

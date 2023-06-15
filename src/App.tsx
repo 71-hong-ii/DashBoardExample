@@ -12,15 +12,18 @@ import {
 import Gridmember from "./components/Gridmembers";
 import { Home } from "./pages/home";
 import { Orders } from "./pages/orders";
+import { HomeLayout } from "./components/homeLayout";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/employees" element={<Gridmember />} />
-        <Route path="/orders" element={<Orders />} />
-      </Routes>
+      <HomeLayout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/employees" element={<Gridmember />} />
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
+      </HomeLayout>
     </div>
   );
 }

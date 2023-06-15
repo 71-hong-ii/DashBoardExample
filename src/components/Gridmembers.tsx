@@ -151,7 +151,6 @@ const Gridmember = () => {
         expandField="expanded"
         cellRender={cellRender}
       >
-        <Button onClick = {()=>{}}></Button>
         <GridColumn field="employees" title="Employee" groupable={false}>
           <GridColumn field="fullName" title="fullName"></GridColumn>
           <GridColumn field="jobTitle" title="jobTitle"></GridColumn>
