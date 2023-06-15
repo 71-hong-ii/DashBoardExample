@@ -15,25 +15,12 @@ import { Home } from "./pages/home";
 import {Orders} from "./pages/orders"
 
 function App() {
-  const [contextState, setContextState] = React.useState({
-    localeId: "en-US",
-    firstName: "Peter",
-    lastName: "Douglas",
-    middleName: "",
-    email: "peter.douglas@progress.com",
-    phoneNumber: "(+1) 8373-837-93-02",
-    avatar: null,
-    isInPublicDirectory: true,
-    biography: "",
-    teamId: 1,
-  });
-
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/employees" element={<Gridmember />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/home/employees" element={<Gridmember />} />
+        <Route path="/home/orders" element={<Orders />} />
       </Routes>
     </div>
   );

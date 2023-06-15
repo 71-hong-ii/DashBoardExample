@@ -7,13 +7,13 @@ export const items = [
   {
     text: "Employees",
     selected: false,
-    route: "/employees",
+    route: "/home/employees",
     icon: "k-i-grid",
   },
   {
     text: "Orders",
     selected: false,
-    route: "/orders",
+    route: "/home/orders",
     icon: "k-i-grid",
   },
 ];
