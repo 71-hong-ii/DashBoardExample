@@ -132,7 +132,6 @@ const Gridmember = () => {
 
   return (
     <div>
-      <HomeLayout>
         <div className="card-container grid">
           <h3 className="card-title">Team members</h3>
         </div>
@@ -168,7 +167,6 @@ const Gridmember = () => {
             <GridColumn field="address"></GridColumn>
           </GridColumn>
         </Grid>
-      </HomeLayout>
     </div>
   );
 };

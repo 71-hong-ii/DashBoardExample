@@ -17,11 +17,13 @@ import { HomeLayout } from "./components/homeLayout";
 function App() {
   return (
     <div className="App">
+      <HomeLayout>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/employees" element={<Gridmember />} />
         <Route path="/orders" element={<Orders />} />
       </Routes>
+      </HomeLayout>
     </div>
   );
 }
