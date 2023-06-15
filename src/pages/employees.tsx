@@ -1,9 +1,9 @@
 import Gridmember from "../components/Gridmembers";
 
-export const Orders = () => {
+export const Employees = () => {
     return (
       <div>
         <Gridmember />
       </div>
     );
-   }
+}

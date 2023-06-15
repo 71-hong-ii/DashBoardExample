@@ -9,7 +9,7 @@ import {
   LocalizationProvider,
   loadMessages,
 } from "@progress/kendo-react-intl";
-import Gridmember from "./components/Gridmembers";
+import { Employees } from "./pages/employees"
 import { Home } from "./pages/home";
 import { Orders } from "./pages/orders";
 import { HomeLayout } from "./components/homeLayout";
@@ -19,8 +19,8 @@ function App() {
     <div className="App">
       <HomeLayout>
         <Routes>
-          <Route path="/" element={<Gridmember />} />
-          <Route path="/employees" element={<Gridmember />} />
+          <Route path="/" element={<Employees />} />
+          <Route path="/employees" element={<Employees />} />
           <Route path="/orders" element={<Orders />} />
         </Routes>
       </HomeLayout>
