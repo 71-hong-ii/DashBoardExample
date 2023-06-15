@@ -7,11 +7,16 @@ import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
 import { teamOrders } from '../resources/teamOrders.js';
 import { categories } from '../resources/categories.js';
 
-// 주문량 데이터를 저장합니다.
-const data = Object.entries(teamOrders).map(([teamID, count]) => ({
+const data = Object.entries(teamOrders).map(([teamID, count], index) => ({
   category: `Team ${teamID}`,
   value: count,
+  color: index === 0 ? 'rgb(252, 74, 70)' :
+         index === 1 ? 'rgb(255, 221, 80)' :
+         index === 2 ? 'rgb(65, 202, 108)' :
+                              'rgb(58, 65, 249)',
 }));
+
+
 
 // 툴팁을 렌더링하는 컴포넌트를 정의합니다.
 const OrderTooltip: React.FC<any> = ({ point }) => {
