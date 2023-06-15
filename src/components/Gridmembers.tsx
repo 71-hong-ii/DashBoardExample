@@ -63,6 +63,16 @@ const processWithGroups = (data: employee[], dataState: State) => {
 };
 
 
+const getDataFromServer  = () =>{
+  const Http = new XMLHttpRequest();
+  const url = "https://4quunovf83.execute-api.us-east-2.amazonaws.com/default/MyFastAPI1";
+
+  Http.open("GET", url);
+  Http.send();
+
+  console.log("hihi\n");
+  console.log(Http.responseText);
+}
 
 const Gridmember = () => {
   const [dataState, setDataState] = React.useState<State>(initialDataState);
@@ -71,6 +81,12 @@ const Gridmember = () => {
   );
   const [collapsedState, setCollapsedState] = React.useState<string[]>([]);
 
+  const newData = setExpandedState({
+
+
+    data: result.data,
+    collapsedIds: collapsedState,
+  });
 
   const dataStateChange = (event: GridDataStateChangeEvent) => {
     const newDataState = processWithGroups(employees, event.dataState);
@@ -110,10 +126,6 @@ const Gridmember = () => {
     }
     return tdElement as JSX.Element;
   };
-  const newData = setExpandedState({
-    data: result.data,
-    collapsedIds: collapsedState,
-  });
 
 
 
@@ -139,6 +151,7 @@ const Gridmember = () => {
         expandField="expanded"
         cellRender={cellRender}
       >
+        <Button onClick = {()=>{}}></Button>
         <GridColumn field="employees" title="Employee" groupable={false}>
           <GridColumn field="fullName" title="fullName"></GridColumn>
           <GridColumn field="jobTitle" title="jobTitle"></GridColumn>

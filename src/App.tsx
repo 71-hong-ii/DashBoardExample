@@ -9,10 +9,9 @@ import {
   LocalizationProvider,
   loadMessages,
 } from "@progress/kendo-react-intl";
-import PieChart from "./components/PieChart";
 import Gridmember from "./components/Gridmembers";
 import { Home } from "./pages/home";
-import {Orders} from "./pages/orders"
+import { Orders } from "./pages/orders";
 
 function App() {
   return (
