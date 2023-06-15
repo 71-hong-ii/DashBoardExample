@@ -6,10 +6,8 @@ import { HomeLayout } from "../components/homeLayout"
 export const Orders = () => {
     return (
       <div>
-        <HomeLayout>
           <PieChart />
           <BarChart />
-        </HomeLayout>
       </div>
     );
    }
