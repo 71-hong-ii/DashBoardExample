@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-  Chart,
-  ChartSeries,
-  ChartSeriesItem,
-  ChartCategoryAxis,
-  ChartCategoryAxisItem,
-  ChartTitle,
-  ChartLegend,
-  ChartTooltip,
-} from "@progress/kendo-react-charts";
-import {
-  TooltipContext,
-  SharedTooltipContext,
-} from "@progress/kendo-react-charts";
+import React, { useState, useEffect } from 'react';
+import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend, ChartTooltip } from '@progress/kendo-react-charts';
+import { TooltipContext, SharedTooltipContext } from '@progress/kendo-react-charts';
+import "./PieChart.scss"
 
 interface OrderData {
   teamID: string;
