@@ -1,49 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend, ChartTooltip } from '@progress/kendo-react-charts';
 import { TooltipContext, SharedTooltipContext } from '@progress/kendo-react-charts';
-import "./PieChart.scss"
+import "./PieChart.scss";
 
 interface OrderData {
   teamID: string;
 }
 
-const PieChart: React.FC = () => {
-  const [teamOrders, setTeamOrders] = useState<{ [key: string]: number }>({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface Props {
+  teamOrders: { [key: string]: number };
+}
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch("http://13.59.95.158:8000/data/orders");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data: OrderData[] = await response.json();
-
-        const orders: { [teamID: string]: number } = {};
-        data.forEach((order) => {
-          const teamID = order.teamID;
-          if (teamID) {
-            if (orders[teamID]) {
-              orders[teamID] += 1;
-            } else {
-              orders[teamID] = 1;
-            }
-          }
-        });
-        setTeamOrders(orders);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        setError("Failed to fetch orders");
-        setIsLoading(false);
-      }
-    };
-
-    fetchOrders();
-  }, []);
-
+const PieChart: React.FC<Props> = ({ teamOrders }) => {
   const categories = Object.keys(teamOrders).map((teamID) => `Team ${teamID}`);
   const data = Object.entries(teamOrders).map(([teamID, count]) => ({
     category: `Team ${teamID}`,
@@ -69,14 +37,6 @@ const PieChart: React.FC = () => {
       </div>
     );
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
     <Chart>
