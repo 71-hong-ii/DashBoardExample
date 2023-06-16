@@ -1,0 +1,24 @@
+.custom-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  .menu-button {
+    margin-right: 16px;
+  }
+  
+  .overview {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .drawer {
+    background-color: #f5f5f5;
+    border-right: 1px solid #ccc;
+  }
+  
+  .drawer .k-item.k-state-selected {
+    background-color: #eaf4ff;
+  }
+  
