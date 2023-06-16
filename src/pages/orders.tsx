@@ -28,7 +28,7 @@ const Orders = () => {
 
   return (
     <div>
-      <TileLayout columns={1} items={dataTiles}></TileLayout>
+      <TileLayout columns={0} items={dataTiles}></TileLayout>
     </div>
   );
 };
