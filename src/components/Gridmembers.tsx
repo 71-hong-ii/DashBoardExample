@@ -1,10 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { Grid, GridColumn, GridColumnMenuSort, GridColumnMenuFilter, GridToolbar, GridFilterChangeEvent, GridExpandChangeEvent, GridGroupChangeEvent, GridDataStateChangeEvent, GridCellProps } from "@progress/kendo-react-grid";
-import { filterBy, CompositeFilterDescriptor, GroupDescriptor, groupBy, GroupResult, State, DataResult, process, AggregateDescriptor } from "@progress/kendo-data-query";
-import { setExpandedState, setGroupIds } from "@progress/kendo-react-data-tools";
+import React, {
+  useState,
+  useEffect,
+  SetStateAction,
+  JSXElementConstructor,
+} from "react";
+import {
+  Grid,
+  GridColumn,
+  GridColumnMenuSort,
+  GridColumnMenuFilter,
+  GridToolbar,
+  GridFilterChangeEvent,
+  GridExpandChangeEvent,
+  GridGroupChangeEvent,
+  GridDataStateChangeEvent,
+  GridCellProps,
+} from "@progress/kendo-react-grid";
+import {
+  IntlProvider,
+  load,
+  LocalizationProvider,
+  loadMessages,
+  IntlService,
+} from "@progress/kendo-react-intl";
+import {
+  filterBy,
+  CompositeFilterDescriptor,
+  GroupDescriptor,
+  groupBy,
+  GroupResult,
+  State,
+  DataResult,
+  process,
+  AggregateDescriptor,
+} from "@progress/kendo-data-query";
+import {
+  setExpandedState,
+  setGroupIds,
+} from "@progress/kendo-react-data-tools";
+import { employee } from "./../interfaces/employee";
 import axios from "axios";
-import { employee } from "../interfaces/employee";
-
 const initialDataState: State = {
   take: 10,
   skip: 0,
@@ -29,18 +64,8 @@ const processWithGroups = (data: employee[], dataState: State) => {
   return newDataState;
 };
 
-let arr: employee[] = [];
-function getDataFromServer() {
-  axios
-    .get("http://13.59.95.158:8000/data/employees", { withCredentials: true })
-    .then((response) => {
-      arr = response.data;
-      console.log(arr[0]);
-    })
-    .catch((error) => {});
-}
-
 const Gridmember = () => {
+  let arr: employee[] = [];
   const [dataState, setDataState] = useState<State>(initialDataState);
   const [result, setResult] = useState<DataResult>({ data: [], total: 0 });
   const [collapsedState, setCollapsedState] = useState<string[]>([]);
