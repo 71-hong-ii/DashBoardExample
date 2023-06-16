@@ -40,6 +40,7 @@ import {
 } from "@progress/kendo-react-data-tools";
 import { employee } from "./../interfaces/employee";
 import axios from "axios";
+import './Gridmembers.scss';
 const initialDataState: State = {
   take: 10,
   skip: 0,
