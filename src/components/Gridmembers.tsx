@@ -38,13 +38,8 @@ import {
   setExpandedState,
   setGroupIds,
 } from "@progress/kendo-react-data-tools";
-import employees from "./../resources/employees_json.json";
-import { teams } from "./../resources/teams";
-import { orders } from "./../resources/orders";
 import { employee } from "./../interfaces/employee";
-import { HomeLayout } from "./homeLayout";
 import axios from "axios";
-import { promiseHooks } from "v8";
 
 const initialDataState: State = {
   take: 10,
@@ -70,18 +65,8 @@ const processWithGroups = (data: employee[], dataState: State) => {
   return newDataState;
 };
 
-let arr: employee[] = [];
-function getDataFromServer() {
-  axios
-    .get("http://13.59.95.158:8000/data/employees", { withCredentials: true })
-    .then((response) => {
-      arr = response.data;
-      console.log(arr[0]);
-    })
-    .catch((error) => {});
-}
-
 const Gridmember = () => {
+  let arr: employee[] = [];
   const [dataState, setDataState] = useState<State>(initialDataState);
   //replace employees to..
   const [result, setResult] = React.useState<DataResult>(
@@ -89,7 +74,6 @@ const Gridmember = () => {
   );
   const [collapsedState, setCollapsedState] = useState<string[]>([]);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
