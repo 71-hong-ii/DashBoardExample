@@ -72,7 +72,6 @@ const processWithGroups = (data: employee[], dataState: State) => {
 
 let arr: employee[] = [];
 function getDataFromServer() {
-
   axios
     .get("http://13.59.95.158:8000/data/employees", { withCredentials: true })
     .then((response) => {
@@ -80,7 +79,6 @@ function getDataFromServer() {
       console.log(arr[0]);
     })
     .catch((error) => {});
-
 }
 
 const Gridmember = () => {
@@ -93,15 +91,25 @@ const Gridmember = () => {
 
   
   useEffect(() => {
-    console.log(arr[0])
-    axios
-      .get("http://13.59.95.158:8000/data/employees", { withCredentials: true })
-      .then((response) => {
-        arr = response.data;
-        console.log(arr[0]);
-      })
-      .catch((error) => {});
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://13.59.95.158:8000/data/employees",
+          { withCredentials: true }
+        );
+        const data = response.data;
+        console.log(data[0]);
+        arr = data;
+  
+        const newDataState = processWithGroups(arr, dataState);
+        setResult(newDataState);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchData();
+  }, [dataState]);
 
 
   const newData = setExpandedState({
