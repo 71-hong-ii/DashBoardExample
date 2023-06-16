@@ -29,12 +29,28 @@ const processWithGroups = (data: employee[], dataState: State) => {
   return newDataState;
 };
 
+<<<<<<< HEAD
 const Gridmember: React.FC = () => {
+=======
+let arr: employee[] = [];
+function getDataFromServer() {
+  axios
+    .get("http://13.59.95.158:8000/data/employees", { withCredentials: true })
+    .then((response) => {
+      arr = response.data;
+      console.log(arr[0]);
+    })
+    .catch((error) => {});
+}
+
+const Gridmember = () => {
+>>>>>>> f17670530da6424af2f5f4a0b7fb6504427240f5
   const [dataState, setDataState] = useState<State>(initialDataState);
   const [result, setResult] = useState<DataResult>({ data: [], total: 0 });
   const [collapsedState, setCollapsedState] = useState<string[]>([]);
 
   useEffect(() => {
+<<<<<<< HEAD
     axios
       .get<employee[]>("http://13.59.95.158:8000/data/employees", { withCredentials: true })
       .then((response) => {
@@ -44,6 +60,27 @@ const Gridmember: React.FC = () => {
       })
       .catch((error) => {});
   }, []);
+=======
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://13.59.95.158:8000/data/employees",
+          { withCredentials: true }
+        );
+        const data = response.data;
+        console.log(data[0]);
+        arr = data;
+  
+        const newDataState = processWithGroups(arr, dataState);
+        setResult(newDataState);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchData();
+  }, [dataState]);
+>>>>>>> f17670530da6424af2f5f4a0b7fb6504427240f5
 
   const newData = setExpandedState({
     data: result.data,
