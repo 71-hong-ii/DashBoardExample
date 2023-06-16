@@ -40,7 +40,6 @@ import {
 } from "@progress/kendo-react-data-tools";
 import { employee } from "./../interfaces/employee";
 import axios from "axios";
-
 const initialDataState: State = {
   take: 10,
   skip: 0,
@@ -68,10 +67,7 @@ const processWithGroups = (data: employee[], dataState: State) => {
 const Gridmember = () => {
   let arr: employee[] = [];
   const [dataState, setDataState] = useState<State>(initialDataState);
-  //replace employees to..
-  const [result, setResult] = React.useState<DataResult>(
-    processWithGroups(arr, initialDataState)
-  );
+  const [result, setResult] = useState<DataResult>({ data: [], total: 0 });
   const [collapsedState, setCollapsedState] = useState<string[]>([]);
 
   useEffect(() => {
@@ -95,15 +91,13 @@ const Gridmember = () => {
     fetchData();
   }, [dataState]);
 
-
   const newData = setExpandedState({
     data: result.data,
     collapsedIds: collapsedState,
   });
 
-  //and here
   const dataStateChange = (event: GridDataStateChangeEvent) => {
-    const newDataState = processWithGroups(arr, event.dataState);
+    const newDataState = processWithGroups(result.data, event.dataState);
     setResult(newDataState);
     setDataState(event.dataState);
   };
@@ -120,10 +114,7 @@ const Gridmember = () => {
   };
 
   const cellRender = (
-    tdElement: React.ReactElement<
-      HTMLTableCellElement,
-      string | JSXElementConstructor<any>
-    > | null,
+    tdElement: React.ReactElement<HTMLTableCellElement, string | React.JSXElementConstructor<any>> | null,
     cellProps: GridCellProps
   ): JSX.Element => {
     if (cellProps.rowType === "groupFooter") {
