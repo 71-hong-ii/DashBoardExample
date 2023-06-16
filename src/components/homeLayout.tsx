@@ -56,15 +56,19 @@ export const HomeLayout = (props: any) => {
       <div className="custom-toolbar">
         <Button icon="menu" onClick={handleClick} className="menu-button" />
 
-        <span className={selected === 'Employees' || selected === 'Orders' ? 'selected-text' : ''}>
-          {selected === 'Employees' ? 'Employees' : selected === 'Orders' ? 'Orders' : 'Home'}
+        <span
+          className={
+            selected === "Employees" || selected === "Orders"
+              ? "selected-text"
+              : ""
+          }
+        >
+          {selected === "Employees"
+            ? "Employees"
+            : selected === "Orders"
+            ? "Orders"
+            : "Home"}
         </span>
-
-        {selected !== 'Home' && (
-          <Button onClick={handleHomeClick} className="home-button">
-            <Icon name="home" />
-          </Button>
-        )}
       </div>
 
       <div>
