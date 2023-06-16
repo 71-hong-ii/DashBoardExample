@@ -9,6 +9,8 @@ interface OrderData {
 
 const PieChart: React.FC = () => {
   const [teamOrders, setTeamOrders] = useState<{ [key: string]: number }>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -31,8 +33,11 @@ const PieChart: React.FC = () => {
           }
         });
         setTeamOrders(orders);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching orders:", error);
+        setError("Failed to fetch orders");
+        setIsLoading(false);
       }
     };
 
@@ -64,6 +69,14 @@ const PieChart: React.FC = () => {
       </div>
     );
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <Chart>

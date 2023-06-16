@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend, ChartTooltip } from '@progress/kendo-react-charts';
 import { TooltipContext, SharedTooltipContext } from '@progress/kendo-react-charts';
 import "./BarChart.scss";
+
 interface OrderData {
   teamID: string;
 }
 
 const BarChart: React.FC = () => {
   const [teamOrders, setTeamOrders] = useState<{ [key: string]: number }>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -30,8 +33,11 @@ const BarChart: React.FC = () => {
           }
         });
         setTeamOrders(orders);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching orders:', error);
+        setError('Failed to fetch orders');
+        setIsLoading(false);
       }
     };
 
@@ -49,10 +55,10 @@ const BarChart: React.FC = () => {
     if (!point) {
       return null;
     }
-  
+
     const totalOrders = Object.values(teamOrders).reduce((a, b) => a + b, 0);
     const orderPercentage = ((point.value / totalOrders) * 100).toFixed(2);
-  
+
     return (
       <div>
         <h3>{String(point.category)}</h3>
@@ -61,6 +67,14 @@ const BarChart: React.FC = () => {
       </div>
     );
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <Chart>
