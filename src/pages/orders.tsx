@@ -4,7 +4,6 @@ import PieChart from '../components/PieChart';
 import BarChart from '../components/BarChart';
 
 const Orders = () => {
-
   const dataTiles = [
     {
       defaultPosition: {
@@ -28,7 +27,7 @@ const Orders = () => {
 
   return (
     <div>
-      <TileLayout columns={0} items={dataTiles}></TileLayout>
+      <TileLayout columns={2} items={dataTiles}></TileLayout>
     </div>
   );
 };
