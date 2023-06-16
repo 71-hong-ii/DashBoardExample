@@ -1,5 +1,5 @@
 // 필요한 모듈을 import 합니다.
-import * as React from 'react';
+import React from 'react';
 import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend, ChartTooltip } from '@progress/kendo-react-charts';
 // ChartSeriesItemTooltip 컴포넌트를 import 합니다.
 import { ChartSeriesItemTooltip } from '@progress/kendo-react-charts';
@@ -31,7 +31,6 @@ const OrderTooltip: React.FC<any> = ({ point }) => {
   );
 };
 
-
 // 차트 컴포넌트를 정의합니다.
 const PieChart: React.FC = () => (
   <Chart>
@@ -48,6 +47,5 @@ const PieChart: React.FC = () => (
     </ChartSeries>
   </Chart>
 );
-
 
 export default PieChart;

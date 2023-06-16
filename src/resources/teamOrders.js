@@ -1,14 +1,29 @@
-// 팀 오더를 정의합니다.
-import { orders } from "./orders";
-
 export const teamOrders = {};
-orders.forEach((order) => {
-  const teamID = order.teamID;
-  if (teamID) {
-    if (teamOrders[teamID]) {
-      teamOrders[teamID] += 1; // 이미 해당 팀의 주문이 있을 경우 1 증가
-    } else {
-      teamOrders[teamID] = 1; // 해당 팀의 첫 번째 주문인 경우 1로 초기화
+
+fetch('http://13.59.95.158:8000/data/orders')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-  }
-});
+    return response.json();
+  })
+  .then(data => {
+    
+    if (Array.isArray(data)) {
+      data.forEach(order => {
+        const teamID = order.teamID;
+        if (teamID) {
+          if (teamOrders[teamID]) {
+            teamOrders[teamID] += 1;
+          } else {
+            teamOrders[teamID] = 1;
+          }
+        }
+      });
+    } else {
+      throw new Error('Invalid data format');
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching orders:', error);
+  });
