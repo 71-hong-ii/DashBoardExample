@@ -11,7 +11,6 @@ import {HomeLayout} from './components/homeLayout';
 function App() {
   return (
     <div className="App">
-      <HashRouter>
         <HomeLayout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -19,7 +18,6 @@ function App() {
             <Route path="/orders" element={<Orders />} />
           </Routes>
         </HomeLayout>
-      </HashRouter>
     </div>
   );
 }
