@@ -1,43 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Chart, ChartSeries, ChartSeriesItem, ChartCategoryAxis, ChartCategoryAxisItem, ChartTitle, ChartLegend, ChartTooltip } from '@progress/kendo-react-charts';
 import { TooltipContext, SharedTooltipContext } from '@progress/kendo-react-charts';
 import "./BarChart.scss";
+
 interface OrderData {
   teamID: string;
 }
 
-const BarChart: React.FC = () => {
-  const [teamOrders, setTeamOrders] = useState<{ [key: string]: number }>({});
+interface Props {
+  teamOrders: { [key: string]: number };
+}
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch('http://13.59.95.158:8000/data/orders');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data: OrderData[] = await response.json();
-
-        const orders: { [teamID: string]: number } = {};
-        data.forEach(order => {
-          const teamID = order.teamID;
-          if (teamID) {
-            if (orders[teamID]) {
-              orders[teamID] += 1;
-            } else {
-              orders[teamID] = 1;
-            }
-          }
-        });
-        setTeamOrders(orders);
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-      }
-    };
-
-    fetchOrders();
-  }, []);
-
+const BarChart: React.FC<Props> = ({ teamOrders }) => {
   const categories = Object.keys(teamOrders).map((teamID) => `Team ${teamID}`);
   const data = Object.entries(teamOrders).map(([teamID, count]) => ({
     category: `Team ${teamID}`,
@@ -49,10 +23,10 @@ const BarChart: React.FC = () => {
     if (!point) {
       return null;
     }
-  
+
     const totalOrders = Object.values(teamOrders).reduce((a, b) => a + b, 0);
     const orderPercentage = ((point.value / totalOrders) * 100).toFixed(2);
-  
+
     return (
       <div>
         <h3>{String(point.category)}</h3>
