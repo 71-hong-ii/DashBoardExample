@@ -101,7 +101,6 @@ const Gridmember = () => {
         console.log(arr[0]);
       })
       .catch((error) => {});
-      
   }, []);
 
 
