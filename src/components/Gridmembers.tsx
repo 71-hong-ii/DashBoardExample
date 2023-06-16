@@ -41,6 +41,7 @@ import {
 import { employee } from "./../interfaces/employee";
 import axios from "axios";
 import './Gridmembers.scss';
+
 const initialDataState: State = {
   take: 10,
   skip: 0,
@@ -65,8 +66,8 @@ const processWithGroups = (data: employee[], dataState: State) => {
   return newDataState;
 };
 
+let arr: employee[] = [];
 const Gridmember = () => {
-  let arr: employee[] = [];
   const [dataState, setDataState] = useState<State>(initialDataState);
   const [result, setResult] = useState<DataResult>({ data: [], total: 0 });
   const [collapsedState, setCollapsedState] = useState<string[]>([]);
@@ -177,4 +178,4 @@ const Gridmember = () => {
   );
 };
 
-export default Gridmember;
+export { Gridmember ,arr};

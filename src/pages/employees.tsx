@@ -1,7 +1,7 @@
 import { Grid } from "@progress/kendo-react-grid";
 import { TileLayout } from "@progress/kendo-react-layout";
-import Gridmember from "../components/Gridmembers";
-
+import {Gridmember} from "../components/Gridmembers";
+import Chartmember from "../components/Chartmembers";
 const tiles = [
   {
     defaultPosition: {
@@ -10,7 +10,7 @@ const tiles = [
       rowSpan: 1,
     },
     header: "First is",
-    body: "one",
+    body: <Chartmember/>,
   },
   {
     defaultPosition: {
