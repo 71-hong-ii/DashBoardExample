@@ -7,10 +7,9 @@ import {
   ChartSeriesLabels,
 } from "@progress/kendo-react-charts";
 import axios from "axios";
-import { concrete } from "../interfaces/concrete";
 
 const ChartFloorHeight = () => {
-  const [concreteData, setConcreteData] = useState<concrete[]>([]);
+  const [heightData, setHeightData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +23,7 @@ const ChartFloorHeight = () => {
           }
         );
         const data = response.data;
-        setConcreteData(data);
+        setHeightData(data);
       } catch (error) {
         console.error(error);
       }
@@ -34,14 +33,14 @@ const ChartFloorHeight = () => {
   }, []);
 
   return (
-    <div>
+    <div className="chart-container">
       <Chart>
         <ChartSeries>
           <ChartSeriesItem
-            type="line"
-            data={concreteData}
-            categoryField="id"
-            field="value"
+            type="bar" // Change type to 'bar'
+            data={heightData}
+            xField="id"
+            yField="floor_height"
           >
             <ChartSeriesLabels color="#fff" background="none" />
           </ChartSeriesItem>
