@@ -18,7 +18,7 @@ const ChartFloorHeight = () => {
           "http://192.168.0.129:8000/data/floor/height",
           {
             params: {
-              floor_height_input: 2800,
+              floor_height_input: 2000,
             },
           }
         );
