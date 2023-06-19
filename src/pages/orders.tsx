@@ -14,7 +14,7 @@ const Orders: React.FC = () => {
 
   const fetchOrders = useCallback(async () => {
     try {
-      const response = await fetch('http://13.59.95.158:8000/data/orders');
+      const response = await fetch('http://192.168.0.129:8000/data/orders');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
