@@ -2,6 +2,7 @@ import { Grid } from "@progress/kendo-react-grid";
 import { TileLayout } from "@progress/kendo-react-layout";
 import {Gridmember} from "../components/Gridmembers";
 import Chartmember from "../components/Chartmembers";
+import ChartConcrete from "./../components/ChartConcrete"
 const tiles = [
   {
     defaultPosition: {
@@ -19,7 +20,7 @@ const tiles = [
       rowSpan: 1,
     },
     header: "Second is",
-    body: "two",
+    body: <ChartConcrete/>,
   },
   {
     defaultPosition: {
@@ -44,11 +45,13 @@ const dataTiles = [
   },
 ];
 
+//<TileLayout columns={1} items={dataTiles}></TileLayout>
 export const Employees = () => {
   return (
     <div>
       <TileLayout columns={3} items={tiles} rowHeight={300}></TileLayout>
-      <TileLayout columns={1} items={dataTiles}></TileLayout>
+    
+      <Gridmember></Gridmember>
     </div>
   );
 };

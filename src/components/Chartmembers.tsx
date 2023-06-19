@@ -37,11 +37,38 @@ import { employee } from "./../interfaces/employee";
 import axios from "axios";
 
 import { arr } from "./Gridmembers";
-import {employees} from "./../resources/employees"
 
+interface RatingData {
+  rating: string;
+  percentage: number;
+}
 const Chartmember = () => {
-//const [arrData, setArrData] = useState(arr);
+    //const [arrData, setArrData] = useState(arr);
  //const lebelContent = (e : employee) => e.rating.valueOf().toString();
+
+ const calculatePercentage = (): RatingData[] => {
+  const data = arr;
+  const totalCount = data.length;
+  const ratingCounts: { [key: string]: number } = {};
+
+  // Count the occurrences of each rating
+  data.forEach((item) => {
+    const rating = item.rating.toString(); // Convert rating to string
+    ratingCounts[rating] = ratingCounts[rating] ? ratingCounts[rating] + 1 : 1;
+  });
+
+  // Calculate the percentage for each rating category
+  const percentages: RatingData[] = Object.keys(ratingCounts).map((rating) => {
+    const count = ratingCounts[rating];
+    const percentage = (count / totalCount) * 100;
+    return { rating, percentage };
+  });
+
+  return percentages;
+};
+
+const dataWithPercentages: RatingData[] = calculatePercentage();
+
 
   return (
     <div>
@@ -49,14 +76,14 @@ const Chartmember = () => {
         <ChartSeries>
           <ChartSeriesItem
             type="donut"
-            data={arr}
+            data={dataWithPercentages}
             categoryField="rating"
-            field="teamId"
+            field="percentage"
           >
             <ChartSeriesLabels
               color="#fff"
               background="none"
-              //content={lebelContent}
+              content={({ dataItem }) => `${dataItem.rating} (${dataItem.percentage.toFixed(2)}%)`}
             />
           </ChartSeriesItem>
         </ChartSeries>

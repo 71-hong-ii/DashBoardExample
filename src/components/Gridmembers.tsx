@@ -80,7 +80,7 @@ const Gridmember = () => {
           { withCredentials: true }
         );
         const data = response.data;
-        console.log(data[0]);
+        //console.log(data[0]);
         arr = data;
   
         const newDataState = processWithGroups(arr, dataState);
