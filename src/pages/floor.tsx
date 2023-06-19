@@ -1,10 +1,41 @@
 import React from 'react';
+import { TileLayout } from "@progress/kendo-react-layout";
+import Chartfloor from '../components/Chartfloor';
+
+const tiles = [
+  {
+    defaultPosition: {
+      col: 1,
+      colSpan: 1,
+      rowSpan: 1,
+    },
+    header: "floor",
+    body: "one",
+  },
+  {
+    defaultPosition: {
+      col: 2,
+      colSpan: 1,
+      rowSpan: 1,
+    },
+    header: "Second is",
+    body: "two",
+  },
+  {
+    defaultPosition: {
+      col: 3,
+      colSpan: 1,
+      rowSpan: 1,
+    },
+    header: "Third is",
+    body: "three",
+  },
+];
 
 export const Floor: React.FC = () => {
   return (
-    <div className="floor-container">
-      <h2 className="welcome-text">Welcome to floor page</h2>
-      {/* 이쁜 UI 디자인 요소들을 추가해주세요 */}
+    <div>
+      <Chartfloor></Chartfloor>
     </div>
   );
 };
