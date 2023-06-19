@@ -7,6 +7,8 @@ import {Employees} from './pages/employees';
 import Orders from './pages/orders';
 import {Home} from './pages/home';
 import {HomeLayout} from './components/homeLayout';
+import {Floor} from "./pages/floor"
+import {Concrete} from "./pages/concrete"
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/employees" element={<Employees />} />
             <Route path="/orders" element={<Orders />} />
+            <Route path="/floor" element={<Floor />} />
+            <Route path="/concrete" element={<Concrete />} />
           </Routes>
         </HomeLayout>
     </div>
