@@ -37,7 +37,7 @@ const ChartFloorHeight = () => {
       <Chart>
         <ChartSeries>
           <ChartSeriesItem
-            type="bar" // Change type to 'bar'
+            type="line" // Change type to 'bar'
             data={heightData}
             xField="id"
             yField="floor_height"
