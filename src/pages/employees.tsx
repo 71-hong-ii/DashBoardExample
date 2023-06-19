@@ -2,7 +2,7 @@ import { Grid } from "@progress/kendo-react-grid";
 import { TileLayout } from "@progress/kendo-react-layout";
 import {Gridmember} from "../components/Gridmembers";
 import Chartmember from "../components/Chartmembers";
-import ChartConcrete from "./../components/ChartConcrete";
+import ChartConcrete from "../components/ChartFloorHeight";
 
 const tiles = [
   {

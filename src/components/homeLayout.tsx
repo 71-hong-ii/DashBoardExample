@@ -34,6 +34,12 @@ export const items = [
     text: 'Building',
     selected: false,
     route: '/building',
+    icon: 'k-i-grid',
+  },
+  {
+    text: 'FloorHeight',
+    selected: false,
+    route: '/floor_height',
     icon: 'chart-line-markers',
   },
 ];

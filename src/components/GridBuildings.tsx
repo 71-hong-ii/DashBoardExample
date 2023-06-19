@@ -140,7 +140,7 @@ const GridBuildings = () => {
   return (
     <div>
       <div className="card-container grid">
-        <h3 className="card-title">Team members</h3>
+        <h3 className="card-title">Building Informations</h3>
       </div>
       <span></span>
       <Grid
