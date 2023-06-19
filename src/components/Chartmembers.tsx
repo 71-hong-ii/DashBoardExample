@@ -43,32 +43,41 @@ interface RatingData {
   percentage: number;
 }
 const Chartmember = () => {
-    //const [arrData, setArrData] = useState(arr);
- //const lebelContent = (e : employee) => e.rating.valueOf().toString();
+  const [perData, setPerData] = useState<RatingData[]>([]);
+  //const lebelContent = (e : employee) => e.rating.valueOf().toString();
+  const calculatePercentage = (): RatingData[] => {
+    const data = arr;
+    const totalCount = data.length;
+    const ratingCounts: { [key: string]: number } = {};
 
- const calculatePercentage = (): RatingData[] => {
-  const data = arr;
-  const totalCount = data.length;
-  const ratingCounts: { [key: string]: number } = {};
+    // Count the occurrences of each rating
+    data.forEach((item) => {
+      const rating = item.rating.toString(); // Convert rating to string
+      ratingCounts[rating] = ratingCounts[rating]
+        ? ratingCounts[rating] + 1
+        : 1;
+    });
 
-  // Count the occurrences of each rating
-  data.forEach((item) => {
-    const rating = item.rating.toString(); // Convert rating to string
-    ratingCounts[rating] = ratingCounts[rating] ? ratingCounts[rating] + 1 : 1;
-  });
+    // Calculate the percentage for each rating category
+    const percentages: RatingData[] = Object.keys(ratingCounts).map(
+      (rating) => {
+        const count = ratingCounts[rating];
+        const percentage = (count / totalCount) * 100;
+        return { rating, percentage };
+      }
+    );
 
-  // Calculate the percentage for each rating category
-  const percentages: RatingData[] = Object.keys(ratingCounts).map((rating) => {
-    const count = ratingCounts[rating];
-    const percentage = (count / totalCount) * 100;
-    return { rating, percentage };
-  });
+    return percentages;
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      dataWithPercentages = calculatePercentage();
+      setPerData(dataWithPercentages);
+    };
+    fetchData();
+  }, [perData]);
 
-  return percentages;
-};
-
-const dataWithPercentages: RatingData[] = calculatePercentage();
-
+  let dataWithPercentages: RatingData[];
 
   return (
     <div>
@@ -76,14 +85,16 @@ const dataWithPercentages: RatingData[] = calculatePercentage();
         <ChartSeries>
           <ChartSeriesItem
             type="donut"
-            data={dataWithPercentages}
+            data={perData}
             categoryField="rating"
             field="percentage"
           >
             <ChartSeriesLabels
               color="#fff"
               background="none"
-              content={({ dataItem }) => `${dataItem.rating} (${dataItem.percentage.toFixed(2)}%)`}
+              content={({ dataItem }) =>
+                `${dataItem.rating} (${dataItem.percentage.toFixed(2)}%)`
+              }
             />
           </ChartSeriesItem>
         </ChartSeries>

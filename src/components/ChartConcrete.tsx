@@ -44,6 +44,7 @@ const ChartConcrete = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        /*
         const response = await axios.get(
           "http://13.59.95.158:8000/data/concrete",
           { withCredentials: true }
@@ -52,9 +53,11 @@ const ChartConcrete = () => {
         console.log("hello");
         console.log(data[0]);
         concreteArr = data;
+        */
       } catch (error) {
         console.error(error);
       }
+      
     };
 
     fetchData();
