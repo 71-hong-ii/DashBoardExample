@@ -31,9 +31,9 @@ export const items = [
     icon: 'k-i-grid',
   },
   {
-    text: 'Concrete',
+    text: 'Building',
     selected: false,
-    route: '/concrete',
+    route: '/building',
     icon: 'chart-line-markers',
   },
 ];

@@ -8,7 +8,7 @@ import Orders from './pages/orders';
 import {Home} from './pages/home';
 import {HomeLayout} from './components/homeLayout';
 import {Floor} from "./pages/floor"
-import {Concrete} from "./pages/concrete"
+import {Building} from "./pages/building"
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <Route path="/employees" element={<Employees />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/floor" element={<Floor />} />
-            <Route path="/concrete" element={<Concrete />} />
+            <Route path="/building" element={<Building />} />
           </Routes>
         </HomeLayout>
     </div>
