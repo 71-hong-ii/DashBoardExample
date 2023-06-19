@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { TileLayout, TileLayoutItem } from '@progress/kendo-react-layout';
 import PieChart from '../components/PieChart';
 import BarChart from '../components/BarChart';
@@ -12,37 +12,57 @@ const Orders: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch('http://13.59.95.158:8000/data/orders');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data: OrderData[] = await response.json();
-
-        const orders: { [teamID: string]: number } = {};
-        data.forEach(order => {
-          const teamID = order.teamID;
-          if (teamID) {
-            if (orders[teamID]) {
-              orders[teamID] += 1;
-            } else {
-              orders[teamID] = 1;
-            }
-          }
-        });
-        setTeamOrders(orders);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-        setError('Failed to fetch orders');
-        setIsLoading(false);
+  const fetchOrders = useCallback(async () => {
+    try {
+      const response = await fetch('http://13.59.95.158:8000/data/orders');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
+      const data: OrderData[] = await response.json();
 
-    fetchOrders();
+      const orders: { [teamID: string]: number } = {};
+      data.forEach((order) => {
+        const teamID = order.teamID;
+        if (teamID) {
+          orders[teamID] = orders[teamID] ? orders[teamID] + 1 : 1;
+        }
+      });
+      setTeamOrders(orders);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      setError('Failed to fetch orders');
+      setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
+
+  const dataTiles = useMemo(
+    () => [
+      {
+        defaultPosition: {
+          col: 1,
+          colSpan: 1,
+          rowSpan: 1,
+        },
+        header: 'PieChart here',
+        body: <PieChart teamOrders={teamOrders} />,
+      },
+      {
+        defaultPosition: {
+          col: 2,
+          colSpan: 1,
+          rowSpan: 1,
+        },
+        header: 'BarChart here',
+        body: <BarChart teamOrders={teamOrders} />,
+      },
+    ],
+    [teamOrders]
+  );
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -51,27 +71,6 @@ const Orders: React.FC = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
-  const dataTiles = [
-    {
-      defaultPosition: {
-        col: 1,
-        colSpan: 1,
-        rowSpan: 1,
-      },
-      header: "PieChart here",
-      body: <PieChart teamOrders={teamOrders} />,
-    },
-    {
-      defaultPosition: {
-        col: 2,
-        colSpan: 1,
-        rowSpan: 1,
-      },
-      header: "BarChart here",
-      body: <BarChart teamOrders={teamOrders} />,
-    },
-  ];
 
   return (
     <div>
