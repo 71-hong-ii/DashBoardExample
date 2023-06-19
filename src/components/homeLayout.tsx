@@ -19,6 +19,18 @@ export const items = [
     icon: 'chart-line-markers',
   },
   {
+    text: 'Floor',
+    selected: false,
+    route: '/floor',
+    icon: 'k-i-grid',
+  },
+  {
+    text: 'Concrete',
+    selected: false,
+    route: '/concrete',
+    icon: 'chart-line-markers',
+  },
+  {
     text: 'Home',
     selected: false,
     route: '/',
@@ -58,16 +70,16 @@ export const HomeLayout = (props: any) => {
 
         <span
           className={
-            selected === "Employees" || selected === "Orders"
-              ? "selected-text"
-              : ""
+            selected === 'Employees' || selected === 'Orders'
+              ? 'selected-text'
+              : ''
           }
         >
-          {selected === "Employees"
-            ? "Employees"
-            : selected === "Orders"
-            ? "Orders"
-            : "Home"}
+          {selected === 'Employees'
+            ? 'Employees'
+            : selected === 'Orders'
+            ? 'Orders'
+            : 'Home'}
         </span>
       </div>
 
