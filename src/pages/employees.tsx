@@ -10,7 +10,7 @@ const tiles = [
       colSpan: 1,
       rowSpan: 1,
     },
-    header: "First is",
+    header: "% of each rating",
     body: <Chartmember/>,
   },
   {
@@ -49,7 +49,7 @@ const dataTiles = [
 export const Employees = () => {
   return (
     <div>
-      <TileLayout columns={3} items={tiles} rowHeight={300}></TileLayout>
+      <TileLayout columns={3} items={tiles} rowHeight="auto"></TileLayout>
     
       <Gridmember></Gridmember>
     </div>
