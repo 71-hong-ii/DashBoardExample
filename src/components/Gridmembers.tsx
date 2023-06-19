@@ -76,8 +76,8 @@ const Gridmember = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://13.59.95.158:8000/data/employees",
-          { withCredentials: true }
+          "http://192.168.0.129:8000/data/employees",
+          //"http://13.59.95.158:8000/data/employees",
         );
         const data = response.data;
         //console.log(data[0]);
