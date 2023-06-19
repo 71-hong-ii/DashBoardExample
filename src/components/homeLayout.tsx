@@ -7,6 +7,12 @@ import './HomeLayout.scss';
 
 export const items = [
   {
+    text: 'Home',
+    selected: false,
+    route: '/',
+    icon: 'home',
+  },
+  {
     text: 'Employees',
     selected: true,
     route: '/employees',
@@ -29,12 +35,6 @@ export const items = [
     selected: false,
     route: '/concrete',
     icon: 'chart-line-markers',
-  },
-  {
-    text: 'Home',
-    selected: false,
-    route: '/',
-    icon: 'home',
   },
 ];
 
