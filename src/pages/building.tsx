@@ -1,10 +1,10 @@
-import React from 'react';
+import GridBuildings from "../components/GridBuildings";
 
-export const Building: React.FC = () => {
+//<TileLayout columns={1} items={dataTiles}></TileLayout>
+export const Building = () => {
   return (
-    <div className="concrete-container">
-      <h2 className="welcome-text">Welcome to building page</h2>
-      {/* 이쁜 UI 디자인 요소들을 추가해주세요 */}
+    <div>
+      <GridBuildings></GridBuildings>
     </div>
   );
 };
